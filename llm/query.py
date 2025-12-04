@@ -1,4 +1,6 @@
 from openai import OpenAI
+import subprocess
+import json
 from config import OPENAI_API_KEY, MODEL_PRICING, USD_TO_INR
 
 client = OpenAI(api_key=OPENAI_API_KEY)
@@ -48,28 +50,36 @@ def _calculate_cost(model: str, usage):
     return round(cost_inr, 4), inp_tokens, out_tokens
 
 
-def ask_model(prompt: str, model: str = "gpt-4.1-mini"):
-    response = client.responses.create(
-        model=model,
-        input=[
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ],
-    )
-
-    text = _extract_text(response)
-
-    usage = getattr(response, "usage", None)
-
-    cost_inr, in_toks, out_toks = _calculate_cost(model, usage)
-
+def ask_model(prompt: str, model: str = "mistral-nemo"):
+    """
+    Primary model used for all lightweight reasoning and routing.
+    """
+    text = run_ollama(model, prompt)
     meta = {
         "model": model,
-        "input_tokens": in_toks,
-        "output_tokens": out_toks,
-        "cost_inr": cost_inr
+        "input_tokens": 0,    # we can approximate later
+        "output_tokens": 0,
+        "cost_inr": 0.0
     }
 
     return text, meta
+
+
+def run_ollama(model: str, prompt: str):
+    """
+    Runs an Ollama model and returns pure text output.
+    """
+    try:
+        result = subprocess.run(
+            ["ollama", "run", model],
+            input=prompt.encode("utf-8"),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=30
+        )
+
+        output = result.stdout.decode("utf-8").strip()
+        return output
+
+    except Exception as e:
+        return f"[NYX/olm] [!] {e}"
