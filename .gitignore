@@ -1,0 +1,9 @@
+# prioritize uploading these files first!!
+config.py
+token.json
+credentials.json
+
+/__pycache__/
+__pycache__/
+*.pyc
+.env
