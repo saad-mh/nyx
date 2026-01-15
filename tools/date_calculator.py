@@ -60,3 +60,14 @@ def subtract_days(start: date, days: int) -> date:
     """
     return start - timedelta(days=days)
 
+def is_weekend(target_date: date) -> bool:
+    """
+    Checks if the given date falls on a weekend (Saturday or Sunday).
+    
+    :param target_date: Description
+    :type target_date: date
+    :return: Description
+    :rtype: bool
+    """
+    return target_date.weekday() >= 5
+

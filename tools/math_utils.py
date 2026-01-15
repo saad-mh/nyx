@@ -44,12 +44,6 @@ def cosine(angle_rad):
 def tangent(angle_rad):
     return math.tan(angle_rad)
 
-def radians(degrees):
-    return math.radians(degrees)
-
-def degrees(radians):
-    return math.degrees(radians)
-
 def is_prime(n):
     """Return True if `n` is prime, False otherwise.
 

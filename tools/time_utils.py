@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 def current_datetime() -> str:
     """
@@ -21,6 +21,29 @@ def current_date() -> str:
     return datetime.now().date().isoformat()
 
 # print("current date: ", current_date())
+
+def current_month() -> str:
+    """
+    returns the current month as a string.
+
+    :return: Description
+    :rtype: str
+    """
+    return datetime.now().strftime("%B")
+
+# print("current month: ", current_month())
+
+def current_year() -> int:
+    """
+    returns the current year as an integer.
+
+    :return: Description
+    :rtype: int
+    """
+    return datetime.now().year
+
+# print("current year: ", current_year())
+
 
 def current_time(format_24: bool = True) -> str:
     """
@@ -51,3 +74,36 @@ def current_timezone():
     return datetime.now().astimezone().tzname()
 
 # print("current timezone: ", current_timezone())
+
+def seconds_between(start: datetime, end: datetime) -> int:
+    """
+    returns how many seconds are there between two datetime objects.
+    
+    :param start: Description
+    :type start: datetime
+    :param end: Description
+    :type end: datetime
+    :return: Description
+    :rtype: int
+    """
+    delta = end - start
+    return abs(int(delta.total_seconds()))
+
+def add_seconds(start: datetime, seconds: int) -> datetime:
+    """
+    Add a number of seconds to a given datetime.
+    
+    :return: Description
+    :rtype: datetime
+    """
+    return start + timedelta(seconds=seconds)
+
+def subtract_seconds(start: datetime, seconds: int) -> datetime:
+    """
+    Subtract a number of seconds from a given datetime.
+
+    :return: Description
+    :rtype: datetime
+    """
+    return start - timedelta(seconds=seconds)
+

@@ -1,5 +1,5 @@
 from datetime import date
-from tools import date_calculator, math_utils, memory_store, system_info, task_manager, text_utils, time_utils
+from tools import date_calculator, math_utils, memory_store, system_info, task_manager, text_utils, time_utils, conversion
 
 __all__ = [
     "date_calculator",
@@ -33,8 +33,7 @@ print("5 / 2 = ", math_utils.divide(5, 2))
 print("2 ^ 3 = ", math_utils.power(2, 3))
 print("sqrt(16) = ", math_utils.sqrt(16))
 print("5! = ", math_utils.factorial(5))
-print("log10(100) = ", math_utils.logarithm(100))
-print("sin(π/2) = ", math_utils.sine(math_utils.radians(90)))
+print("log10(100) = ", math_utils.logarithm(100, 10))
 print("Is 23 prime? ", math_utils.is_prime(23))
 print("=====================================================================")
 print("Testing text utils module: ")
@@ -50,4 +49,14 @@ print("Current time (24h): ", time_utils.current_time(format_24=True))
 print("Current time (12h): ", time_utils.current_time(format_24=False))
 print("Current timestamp: ", time_utils.timestamp())
 print("Current timezone: ", time_utils.current_timezone())
+print("=====================================================================")
+print("Testing conversion utils module: ")
+print("10 mm to cm: ", conversion.mm2cm(10))
+print("5 inches to cm: ", conversion.inches2cm(5))
+print("10 pounds to kg: ", conversion.pounds2kg(10))
+print("5 kg to pounds: ", conversion.kg2pounds(5))
+print("100 Celsius to Fahrenheit: ", conversion.celsius2fahrenheit(100))
+print("212 Fahrenheit to Celsius: ", conversion.fahrenheit2celsius(212))
+print("Radians to Degrees (3.1416): ", conversion.radians2degrees(3.1416))
+print("Degrees to Radians (180): ", conversion.degrees2radians(180))
 print("=====================================================================")
