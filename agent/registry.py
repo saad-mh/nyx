@@ -300,6 +300,8 @@ TOOLS = {
     
     "system_status": {
         "description": "Returns the operating system, hostname, and current user.",
+        "module": "agent.tools.system_info",
+        "function": "system_status",
         "args": {},
         "return_type": "dict"
     },
@@ -474,3 +476,12 @@ TOOLS = {
         "return_type": "float"
     },
 }
+
+def tools_for_prompt():
+    lines = []
+    for name, meta in TOOLS.items():
+        args = ", ".join(meta["args"].keys())
+        lines.append(f"- {name}({args}): {meta['description']}")
+    return "\n".join(lines)
+
+print(tools_for_prompt())
